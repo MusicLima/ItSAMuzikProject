@@ -9,6 +9,8 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.Scanner;
+import java.text.DateFormatSymbols;
+
 
 
 public class Main {
@@ -21,6 +23,7 @@ public class Main {
         int a = 0;
         int room = 0;
         do {
+//            System.out.println(getMonth(2));
             System.out.println(" Welcome to SE Hotel Reservation");
             System.out.println("--------------------------------");
             System.out.println(" Would you like to reserve your room?");
@@ -37,36 +40,34 @@ public class Main {
 
                 System.out.println(" Enter your date of check-in");
 
-//                LocalDate checkin = LocalDate.parse(new Scanner(System.in).nextLine());
-
                 // 25/04/2565
 
-//                String[] checkin = null;
-//                String line_in = keyboard.nextLine();
-//
-//                int Day_in = 0;
-//                int Mon_in = 0;
-//                int Year_in = 0;
-//
-//                checkin = line_in.split("/");
-//
-//
-//                Day_in = Integer.parseInt(checkin[0]);
-//                Mon_in = Integer.parseInt(checkin[1]);
-//                Year_in = Integer.parseInt(checkin[2]);
+                String[] checkin = null;
+                String line_in = keyboard.nextLine();
 
-                LocalDate today = LocalDate.now();
-                LocalDate birthday = LocalDate.of(1960, Month.JANUARY, 1);
+                int Day_in = 0;
+                int Mon_in = 0;
+                int Year_in = 0;
 
-                Period p = Period.between(birthday, today);
-                long p2 = ChronoUnit.DAYS.between(birthday, today);
-                System.out.println("You are " + p.getYears() + " years, " + p.getMonths() +
-                        " months, and " + p.getDays() +
-                        " days old. (" + p2 + " days total)");
+                checkin = line_in.split("/");
+
+
+                Day_in = Integer.parseInt(checkin[0]);
+                Mon_in = Integer.parseInt(checkin[1]);
+                Year_in = Integer.parseInt(checkin[2]);
+
+                LocalDate checkin_day = LocalDate.of(Year_in,Month.of(Mon_in),Day_in);
+
+//                LocalDate birthday = LocalDate.of(1960, Month.JANUARY, 1);
+//
+//                Period p = Period.between(birthday, checkin_day);
+//                System.out.println("You are " + p.getYears() + " years, " + p.getMonths() +
+//                        " months, and " + p.getDays() +
+//                        " days old. (" + p2 + " days total)");
 
 //                System.out.println(Day +"/" + Mon +"/" + Year);
 
-                keyboard.nextLine();
+
 
 
                 System.out.println(" Enter your date of check-out");
@@ -88,6 +89,29 @@ public class Main {
 //
 //
 //                TimeSpan timesp = checkoutInt - checkinInt;
+
+                String[] checkout = null;
+                String line_out = keyboard.nextLine();
+
+                int Day_out  = 0;
+                int Mon_out  = 0;
+                int Year_out  = 0;
+
+                checkout = line_out.split("/");
+
+
+                Day_out = Integer.parseInt(checkout[0]);
+                Mon_out = Integer.parseInt(checkout[1]);
+                Year_out = Integer.parseInt(checkout[2]);
+
+                LocalDate checkout_day = LocalDate.of(Year_out,Month.of(Mon_out),Day_out);
+
+                long p2 = ChronoUnit.DAYS.between(checkin_day, checkout_day);
+
+                System.out.println(p2);
+
+                keyboard.nextLine();
+
 
 
                 System.out.println("--------------------------------");
@@ -225,4 +249,8 @@ public class Main {
                 break;
         }//switchYN2
     }//Namearray
+
+    public static String getMonth(int month) {
+        return new DateFormatSymbols().getMonths()[month-1];
+    }
 }//name
