@@ -6,10 +6,14 @@
 //====================================================================================================
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.Scanner;
 
 
 public class Main {
+    static Scanner keyboard = new Scanner(System.in);
+
     public static void main(String[] args) {
         //start
 
@@ -35,10 +39,54 @@ public class Main {
 
 //                LocalDate checkin = LocalDate.parse(new Scanner(System.in).nextLine());
 
+                // 25/04/2565
+
+//                String[] checkin = null;
+//                String line_in = keyboard.nextLine();
+//
+//                int Day_in = 0;
+//                int Mon_in = 0;
+//                int Year_in = 0;
+//
+//                checkin = line_in.split("/");
+//
+//
+//                Day_in = Integer.parseInt(checkin[0]);
+//                Mon_in = Integer.parseInt(checkin[1]);
+//                Year_in = Integer.parseInt(checkin[2]);
+
+                LocalDate today = LocalDate.now();
+                LocalDate birthday = LocalDate.of(1960, Month.JANUARY, 1);
+
+                Period p = Period.between(birthday, today);
+                long p2 = ChronoUnit.DAYS.between(birthday, today);
+                System.out.println("You are " + p.getYears() + " years, " + p.getMonths() +
+                        " months, and " + p.getDays() +
+                        " days old. (" + p2 + " days total)");
+
+//                System.out.println(Day +"/" + Mon +"/" + Year);
+
+                keyboard.nextLine();
+
+
                 System.out.println(" Enter your date of check-out");
 //                LocalDate checkout = LocalDate.parse(new Scanner(System.in).nextLine());
 
-
+//                String[] checkout = null;
+//                String line_in = keyboard.nextLine();
+//
+//                int Day_in = 0;
+//                int Mon_in = 0;
+//                int Year_in = 0;
+//
+//                checkin = line_in.split("/");
+//
+//
+//                Day_in = Integer.parseInt(checkin[0]);
+//                Mon_in = Integer.parseInt(checkin[1]);
+//                Year_in = Integer.parseInt(checkin[2]);
+//
+//
 //                TimeSpan timesp = checkoutInt - checkinInt;
 
 
