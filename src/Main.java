@@ -190,7 +190,7 @@ public class Main {
             } //if
             else if (reserve == 2) {
 
-                System.out.println(" Thank you ");
+                System.out.println(" Thank you for your  attention. ");
 
             } //Else if
 
@@ -198,7 +198,7 @@ public class Main {
             System.out.println(String.format(" Would you like to reserve your room again?\nEnter 1 for Reservation\nEnter 2 for End"));
             a = Integer.parseInt(new Scanner(System.in).nextLine());
         } while (a != 2);
-        System.out.println(" Thank you");
+        System.out.println(" Thank you for your reservation.");
 
     } //Main
 
@@ -245,7 +245,7 @@ public class Main {
                 break;
 
             case "NO" :
-                System.out.println(" Thank you for your attention");
+                System.out.println(" Thank you for your attention.");
                 break;
         }//switchYN2
     }//Namearray
