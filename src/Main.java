@@ -11,88 +11,88 @@ public class Main {
     static Scanner keyboard = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+        Shisutemu shi = new Shisutemu();
      
-        int member = 0;
         int a = 0;
         int room = 0;
+
+
         do {
+
+            Day checkIn = new Day();
+            Day checkOut = new Day();
+
+            SmallRoom smallRoom = new SmallRoom();
+            LargeRoom largeRoom = new LargeRoom();
+
+            Guest guest = new Guest();
+
+            guest.setCheckIn(checkIn);
+            guest.setCheckOut(checkOut);
 
             System.out.println(" Welcome to SE Hotel Reservation");
             System.out.println("--------------------------------");
             System.out.println(" Would you like to reserve your room?");
             System.out.println(" 1.Yes or 2.No ");
             System.out.println(" Please write only number!");
-            System.out.print(" You select: ");
 
-            int reserve = Integer.parseInt(new Scanner(System.in).nextLine());
+            int reserve = shi.tryPaseInt("You select:");
+
+
+
 
             if (reserve == 1) //reserve
             {
 
                 System.out.println("--------------------------------");
 
-                System.out.println(" Enter your date of check-in");            
-                String[] checkin = null;
-                String line_in = keyboard.nextLine();
+                System.out.print(" Enter your date of check-in : ");
+                checkIn.setDate(keyboard.nextLine());
 
-                int Day_in = 0;
-                int Mon_in = 0;
-                int Year_in = 0;
-                checkin = line_in.split("/");
-                Day_in = Integer.parseInt(checkin[0]);
-                Mon_in = Integer.parseInt(checkin[1]);
-                Year_in = Integer.parseInt(checkin[2]);
-                LocalDate checkin_day = LocalDate.of(Year_in,Month.of(Mon_in),Day_in);
-
-                System.out.println(" Enter your date of check-out");
-
-
-                String[] checkout = null;
-                String line_out = keyboard.nextLine();
-                int Day_out  = 0;
-                int Mon_out  = 0;
-                int Year_out  = 0;
-                checkout = line_out.split("/");
-                Day_out = Integer.parseInt(checkout[0]);
-                Mon_out = Integer.parseInt(checkout[1]);
-                Year_out = Integer.parseInt(checkout[2]);
-                LocalDate checkout_day = LocalDate.of(Year_out,Month.of(Mon_out),Day_out);
-
-                long p2 = ChronoUnit.DAYS.between(checkin_day, checkout_day);
-
-
+                System.out.print(" Enter your date of check-out : ");
+                checkOut.setDate(keyboard.nextLine());
 
                 System.out.println("--------------------------------");               
-                System.out.print(" How many members?: ");      
-                
-                member = Integer.parseInt(new Scanner(System.in).nextLine());
+                System.out.print(" How many members?: ");
+
+                guest.setMember(keyboard.nextInt());
 
                 do {
-                    if (member <= 5) {
-                        String roomsize1 = " Smallroom";
-                        String roomsize2 = " Largeroom";
+
+                    if (guest.getMember() <= 5) {
+
+
                         System.out.println(" Please select room size");
-                        System.out.println(" 1." + roomsize1 + "or 2." + roomsize2);
-                        System.out.print(" You Choose :");
-                        room = Integer.parseInt(new Scanner(System.in).nextLine());
+                        System.out.println(" 1." + smallRoom.getRoomSize() + "or 2." + largeRoom.getRoomSize());
+
+                        room = shi.tryPaseInt(" You Choose :");
 
 
                         switch (room) {
                         
                             case 1:
-                                String roomsize3 = " Smallroom";
-                                System.out.println(" Price 1/day for" + roomsize3 + "is $ 15000\n");
+
+                                guest.setGuestRoom(smallRoom);
+
+                                System.out.println(" Price 1/day for" + guest.getGuestRoom().getRoomSize() + "is $" + guest.getGuestRoom().getCost());
+                                System.out.println();
 
                                 break;
 
                             case 2:
-                                String roomsize4 = " Largeroom";
-                                System.out.println(" Price 1/day for " + roomsize4 + " is $25000\n");
 
+                                guest.setGuestRoom(largeRoom);
+                                System.out.println(" Price 1/day for " + guest.getGuestRoom().getRoomSize()  + " is $" + guest.getGuestRoom().getCost());
+                                System.out.println();
 
                                 break;
+
                             default:
-                                System.out.println(" Select 1 or 2 Please try again\n");
+
+                                System.out.println(" Select 1 or 2 Please try again");
+                                System.out.println();
+
                                 break;
 
                         } //switch(room)
@@ -100,10 +100,14 @@ public class Main {
 
                     } // if (member <= 5)
 
-                    else if (member >= 5 && member <= 10) {
-                        String roomsize5 = " Largeroom";
-                        System.out.println(" Your room  is Large room");
-                        System.out.println(" Price 1/day for " + roomsize5 + " is $25000\n");
+
+                    else if (guest.getMember() >= 5 && guest.getMember() <= 10) {
+
+                        guest.setGuestRoom(largeRoom);
+
+                        System.out.println(" Your room  is "+ guest.getGuestRoom().getRoomSize()+" room");
+
+                        System.out.println(" Price 1/day for " + guest.getGuestRoom().getRoomSize()  + " is $" + guest.getGuestRoom().getCost());
 
                     } //else if(member >= 5 && member <= 10)
 
@@ -113,32 +117,40 @@ public class Main {
                     } //else
                     
                 } while (room >= 3);
-                
+
+
                 System.out.println(" --------------------------------");
                 
                 System.out.println(" Your Reservation ");
-                System.out.println(" Check - in :" + line_in);
-                System.out.println(" Check - out :" + line_out);
-                System.out.println(" Total day: " + p2);
-                System.out.println(" Total member :" + member);
+                System.out.println(" Check - in :" + guest.getCheckIn().getDate());
+                System.out.println(" Check - out :" + guest.getCheckOut().getDate());
+                System.out.println(" Total day: " + guest.getBetweenDay());
+                System.out.println(" Total member :" + guest.getMember());
                 
                 if (room == 1)
                 {
-                	 System.out.println(" Total price : $ " + p2 * 15000);
+                	 System.out.println(" Total price : $ " + guest.getBetweenDay() * 15000);
                 }
+
                 else
                 {
-                	 System.out.println(" Total price :  $ " + p2 * 25000);
-                }                             
+                	 System.out.println(" Total price :  $ " + guest.getBetweenDay() * 25000);
+                }
+
                 if (room == 1)
                 {
                     System.out.println(" Room size : Small room");
-                } else 
+                }
+
+                else
                 {
                     System.out.println(" Room size : Large room");
                 }
-                Namearray(member);
+
+                Namearray(guest.getMember());
+
             } //if
+
             else if (reserve == 2) 
             {
                 System.out.println(" Thank you for your  attention. ");
@@ -146,12 +158,18 @@ public class Main {
 
             System.out.println(" --------------------------------");
             
-            System.out.println(String.format(" Would you like to reserve your room again?\nEnter 1 for Reservation\nEnter 2 for End"));
-            a = Integer.parseInt(new Scanner(System.in).nextLine());
+            System.out.println(" Would you like to reserve your room again?" );
+            System.out.println(" Enter 1 for Reservation");
+            System.out.println(" Enter 2 for End");
+
+            a = shi.tryPaseInt("You select:");
+
         } while (a != 2);
+
         System.out.println(" Thank you for your reservation.");
 
       } //Main
+
 
     public static void Namearray(int member1) {
 
