@@ -45,6 +45,7 @@ public class Main {
             if (reserve == 1) //reserve
             {
 
+
                 System.out.println("--------------------------------");
 
                 System.out.print(" Enter your date of check-in : ");
@@ -209,7 +210,11 @@ public class Main {
                 break;
 
             case "NO" :
-                System.out.println(" Thank you for your attention.");
+
+                Stack<String>Thank=new Stack<>();
+                Thank.push(" Thank you for your attention.");
+
+                System.out.println(""+Thank.pop());
                 break;
         }//switchYN2
     }//Namearray
